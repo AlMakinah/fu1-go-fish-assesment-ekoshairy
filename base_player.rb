@@ -22,102 +22,61 @@ class BasePlayer
 
 
   def respond(card_asked, deck)
-    # check if player has that card!
-    card_index = @hand.select{ |c| c.rank == card_asked }  
-    if not card_index.empty?
-      @hand = @hand - card_index
-      checkHand(deck)
-      card_index
-    else
-      puts "Go Fish"
-      false
-    end
+    # TODO: check if player has that card!
+    # card_asked is a rank (1/2/3/...)
+    # deck is the card deck
+    # Check if the player's hand contains that card. If it does, remove it from hand and return it.
+    # Otherwise, print "Go Fish", and return false
+    
   end
 
   def respond_to_response(card_asked, cards_given, deck)
 
-    if(cards_given) # if card given = not false.. check
-        # player plays again - turn stays the same.
-        @hand << cards_given
-        @hand.flatten!
-        puts "I got #{cards_given[0].rank} will play again"
-        checkHand(deck) if checkBooks(cards_given[0].rank)
-        true # play again
-    else
-        # Go Fish, take card from deck
-        d = draw(card_asked, deck)
-    end
-    
+    # TODO: 
+    # if cards_given is not empty. (array of cards returned from other player)
+      # add them to this player's hand.
+      # Check if there are any books!
+      # Check if I need to draw from the deck (if i have no more cards)
+    # otherwise
+      # cards_given empty so I draw from the deck. 
+
   end
 
   def draw(card_asked, deck)
-
-    if not deck.empty?
-
-      card = deck.deal[0]
-      if(card.rank == card_asked)
-        @hand << card
-        puts "I got a #{card.rank} will play again"
-        checkHand(deck) if  checkBooks(card.rank) #CONTINUE HEREEEE
-        true # will play again
-      else
-        # won't play again
-        @hand << card
-        checkHand(deck) if checkBooks(card.rank)
-        false
-      end
-    else
-      false
-    end
+    # TODO:
+    # if the deck is not empty
+      # draw one card
+      # if that card was what player asked for
+        # show card (print it)
+        # add it to hand
+        # check for books
+        # check if i have no more cards, draw from deck
+      # otherwise
+        # add it to hand
+        # check for books
+        # check if i have no more cards, draw from deck
 
   end
 
 
   def checkBooks(rank=nil)
-    # if 4 cards of same rank, remove from @hand and add to @books
-    
-    # When rank is not provided, look for a book in all ranks
-    if rank.nil?
-      temp_hand = @hand
-      while not temp_hand.empty?
-        r = temp_hand[0].rank
-        book = foundRank?(r, temp_hand) 
-        if book == true
-          return true
-        else
-          temp_hand = temp_hand - book
-        end
-      end
-      false
-    else  # otherwise, search for just this rank.
-      return foundRank?(rank, @hand)
-    end
+
+    # TODO:
+    # if no rank is provided
+      # check for any available books for any rank
+      # when found, remove from hand and add to books
+    # if rank is provided
+      # check for a book in that rank.
+      # when found , remove from hand and add to books
 
   end
 
-  def foundRank?(rank, hand)
-      book = hand.select do |card|
-        card.rank == rank
-      end
-
-      if book.length == 4
-        # remove from @hand
-        @hand = @hand - book
-        # add to book
-        @books << book
-        puts "I now have a new book of #{rank}s"
-        true
-      else
-        book
-      end
-  end
 
   def checkHand(deck)
-    if @hand.empty?
-        @hand << deck.deal(5)
-        @hand.flatten!
-        checkBooks
-    end
+    # TODO
+    # if hand is empty
+      # draw 5 cards from the deck
+      # don't forget to check for books!
   end
 
   def getBooks

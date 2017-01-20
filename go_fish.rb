@@ -1,5 +1,3 @@
-# send to saher. exercise looks right? help with tests and solution!!!
-
 require './card_deck'
 require './player'
 require './computer'
@@ -27,11 +25,8 @@ class GoFish
     end
   end
 
-  def gameOver
-    numcards = @players.reduce(0) do |sum, e|
-      sum + e.hand.size
-    end
-    return numcards == 0
+  def gameOver  # game is over, when all player hands are empty.
+    # TODO
   end
 
   def start
@@ -39,6 +34,7 @@ class GoFish
     turn = rand(0..3)
 
     while(not gameOver)  # game loop
+        
         ask = @players[turn].play
         if ask   # if player still has cards
           player_asked = ask[0]
@@ -59,7 +55,7 @@ class GoFish
     getScore
   end
 
-  def getScore
+  def getScore  # winner is the player with the highest number of books.
     winner = @players.max_by(&:getBooks)
     puts "The winner is player #{winner.id}"
     winner

@@ -27,9 +27,7 @@ class CardDeck
   private :initializeDeck
 
   def shuffle
-    # Use your helper.rb shuffle method for this.
-    # shuffling a stack @cards.shuffle!
-    @cards = shuffleStack(@cards)
+    # TODO: Use your helper.rb shuffle method for this.
   end
 
   def peek
@@ -37,13 +35,7 @@ class CardDeck
   end
 
   def deal(num=1)  #removes first num elements and returns it.
-    #@cards.slice!(- num, num)
-    deal = []
-    (1..num).each do |n|
-      d = @cards.pop
-      deal << d if d
-    end
-    deal
+    # TODO
   end
 
   def size
@@ -56,19 +48,9 @@ class CardDeck
 
   def to_s
     # print all elements in the stack, returning it to its original state afterward.
-    # @cards.map do |c|
-    #   c.to_s
-    # end
+    # TODO
   end
 
 end
 
 
-# deck = CardDeck.new
-# deck.shuffle
-# p deck.to_s
-# p deck.peek.rank
-# p deck.peek.to_s
-# p deck.deal.to_s
-# p deck.to_s
-# p deck.size
