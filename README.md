@@ -18,8 +18,9 @@ You'll find 4 classes:
 * Go Fish
 
 
+We're going to start out by implementing small helper methods that will assist us in this exercise. For each section, make sure all the tests are passing. You'll find Ex1 - 4 in helper.rb
 
-We're going to start out by implementing small helper methods that will assist us in this exercise. For each section, make sure all the tests are passing.
+To run the tests: rspec spec/helper_spec
 
 ### Exercise 1
 

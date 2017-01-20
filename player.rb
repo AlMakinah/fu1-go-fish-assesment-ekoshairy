@@ -23,6 +23,11 @@ class Player
     return [id, card]
   end
 
+  def sortHand
+    # TODO
+    # Use method in helper.rb here to sort the array @hand
+  end
+
   def printHand
     @hand.each {|card| p card.to_s }
   end

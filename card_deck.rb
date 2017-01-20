@@ -61,6 +61,7 @@ class CardDeck
   private :initializeDeck
 
   def shuffle
+    # Use your helper.rb shuffle method for this.
     # shuffling a stack @cards.shuffle!
   end
 

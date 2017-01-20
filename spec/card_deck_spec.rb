@@ -64,14 +64,14 @@ describe CardDeck do
 
   describe "peek" do
     it 'returns the first element in the deck without removing it' do
-      peek = @deck.cards.last
+      peek = @deck.cards.peek
       expect(@deck.peek).to eq(peek)
     end
   end
 
   describe "deal" do
     it 'returns the first element in the deck and removes it' do
-      peek = @deck.cards.last
+      peek = @deck.cards.peek
       expect(@deck.deal[0]).to eq(peek)
       expect(@deck.size).to eq(51)
     end

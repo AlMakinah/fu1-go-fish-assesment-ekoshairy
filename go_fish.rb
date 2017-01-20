@@ -36,6 +36,7 @@ class GoFish
   def createPlayers
     (0..3).each do |n|
       p = Player.new(n, @deck.deal(5))
+      #p.sortHand
       @players << p
     end
   end
@@ -75,9 +76,9 @@ class GoFish
 
 end
 
-game = GoFish.new
-p game
-game.start
+# game = GoFish.new
+# p game
+# game.start
 
 
 
