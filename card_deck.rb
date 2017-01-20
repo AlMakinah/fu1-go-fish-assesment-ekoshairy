@@ -1,43 +1,9 @@
 # Use your previously implemented card deck
 # Update Card Deck to be able to deal more than one card (at the beginning)
-class Stack
 
-  def initialize
-    @data = []
-  end
-
-  def push(val)
-    @data.push val
-  end
-
-  def pop
-    @data.pop
-  end
-
-  def peek
-    @data[size - 1]
-  end
-  
-  def size
-    return @data.length
-  end
-
-end
-
-class Card
-
-  attr_accessor :suit, :rank
-
-  def initialize(suit, rank)
-    @suit = suit
-    @rank = rank
-  end
-
-  def to_s
-    [@rank, @suit]
-  end
-
-end
+require './stack'
+require './helper'
+require './card'
 
 class CardDeck
   attr_accessor :cards # cards is a list of Card objects
@@ -63,6 +29,7 @@ class CardDeck
   def shuffle
     # Use your helper.rb shuffle method for this.
     # shuffling a stack @cards.shuffle!
+    @cards = shuffleStack(@cards)
   end
 
   def peek
@@ -73,7 +40,8 @@ class CardDeck
     #@cards.slice!(- num, num)
     deal = []
     (1..num).each do |n|
-      deal << @cards.pop
+      d = @cards.pop
+      deal << d if d
     end
     deal
   end

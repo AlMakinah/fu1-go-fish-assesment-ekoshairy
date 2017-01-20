@@ -53,99 +53,93 @@ describe Player do
 
     describe("respond_to_response") do
       it "should add card to the player's hand" do
-        #respond_to_response(card_asked, cards_given, deck)
-        
-        #@player.respond_to_response(2, [@two, @three], @deck)
+        s1 = @player.hand.size
+        @player.respond_to_response(2, [Card.new("H", 2)], @deck)
+        expect(@player.hand.size - s1).to eq(1)
+      end
+
+      it "should not add card to the player's hand if no cards" do
+        s1 = @player.hand.size
+        @player.stub(:draw).and_return(false)
+        @player.respond_to_response(2, nil, @deck)
+        expect(@player.hand.size - s1).to eq(0)
       end
     end
 
-    # describe("insert") do
-    #   it 'should insert new value into the hashtable' do
-    #     @hashtable.insert("key",4)
-    #     expect(@hashtable.get("key")).to eq(4)
-    #   end
-    #   it 'should insert to the end of the hashtable'  do
-    #     @hashtable.insert("key1", 4)
-    #     @hashtable.insert("key2", 8)
-    #     @hashtable.insert("key3",10)
-    #     expect(@hashtable.size).to eq(3)
-    #   end
+    describe("draw") do
+      it "should add card to the player's hand if found" do
+        @deck.stub(:deal).and_return([Card.new("H", 2)])
+        s1 = @player.hand.size
+        @player.draw(2, @deck)
+        expect(@player.hand.size - s1).to eq(1)
+      end
 
-    #   it 'should update existing value if key exists'  do
-    #     @hashtable.insert("key1", 4)
-    #     @hashtable.insert("key2", 8)
-    #     @hashtable.insert("key1",6)
-    #     expect(@hashtable.size).to eq(2)
-    #     expect(@hashtable.get("key1")).to eq(6)
-    #   end
-    # end
+      it "should return true if found" do
+        @deck.stub(:deal).and_return([Card.new("H", 2)])
+        expect(@player.draw(2, @deck)).to eq(true)
+      end
 
-    # describe("delete") do
-    #   it 'should delete value from the hashtable' do
-    #     @hashtable.insert("key1",4)
-    #     @hashtable.insert("key2",8)
-    #     @hashtable.insert("key3",10)
-    #     @hashtable.delete("key2")
-    #     expect(@hashtable.size).to eq(2)
-    #     expect(@hashtable.get("key2")).to eq(false)
-    #   end
+      it "should add card to the player's hand if not found" do
+        @deck.stub(:deal).and_return([Card.new("H", 3)])
+        s1 = @player.hand.size
+        @player.draw(2, @deck)
+        expect(@player.hand.size - s1).to eq(1)
+      end
+      it "should return false if not found" do
+        @deck.stub(:deal).and_return([Card.new("H", 3)])
+        expect(@player.draw(2, @deck)).to eq(false)
+      end
+    end
 
-    #   it 'should delete value from the hashtable at the end' do
-    #     @hashtable.insert("key1",4)
-    #     @hashtable.insert("key2",8)
-    #     @hashtable.insert("key3",10)
-    #     @hashtable.delete("key3")
-    #     expect(@hashtable.size).to eq(2)
-    #     expect(@hashtable.get("key3")).to eq(false)
-    #   end
+    describe("checkBooks") do 
+        it "should check if there is a book of a certain rank" do
+            s1 = @player.books.size
+            @player.hand << Card.new("T", 2)
+            @player.hand << Card.new("D", 2)
+            @player.checkBooks(2)
+            expect(@player.books.size - s1).to eq(1)
+        end
 
-    #   it 'should delete value from the hashtable at the beginning' do
-    #     @hashtable.insert("key1",4)
-    #     @hashtable.insert("key2",8)
-    #     @hashtable.insert("key3",10)
-    #     @hashtable.delete("key1")
-    #     expect(@hashtable.size).to eq(2)
-    #     expect(@hashtable.get("key1")).to eq(false)
-    #   end
-    # end
+        it "should check if there is a book of a certain rank. remove from hand" do
+            @player.hand << Card.new("T", 2)
+            @player.hand << Card.new("D", 2)
+            s1 = @player.hand.size
+            @player.checkBooks(2)
+            expect(s1 - @player.hand.size).to eq(4)
+        end
 
-    # describe("collisions") do
-    #   it 'should handle collision' do
-    #     expect(HashHelp).to receive(:hashit).at_least(:once).and_return(0)        
-    #     @hashtable.insert("key1",4)
-    #     @hashtable.insert("key2",8)
-    #     @hashtable.insert("key3",10)
-    #     expect(@hashtable.size).to eq(3)
-    #     expect(@hashtable.get("key1")).to eq(4)
-    #     expect(@hashtable.get("key2")).to eq(8)
-    #     expect(@hashtable.get("key3")).to eq(10)
-    #   end
-    # end
+        it "should check if there is a book of a certain rank and if not found wont add" do
+            s1 = @player.books.size
+            @player.checkBooks(2)
+            expect(@player.books.size - s1).to eq(0)
+        end
 
-    # describe("resizing hashtable") do
-    #   it 'should halve the size of the hash table if less than quarter full' do
-    #     expect(@hashtable.maxsize).to eq(8)
-    #     @hashtable.insert("key1",4)
-    #     @hashtable.insert("key2",8)
-    #     @hashtable.delete("key2")
-    #     expect(@hashtable.size).to eq(1)
-    #     expect(@hashtable.maxsize).to eq(4)
-    #   end
+        it "should check if there is a book of any rank" do
+            s1 = @player.books.size
+            @player.hand << Card.new("T", 2)
+            @player.hand << Card.new("D", 2)
+            @player.checkBooks
+            expect(@player.books.size - s1).to eq(1)
+        end
+        
+    end
 
-    #   it 'should double the size of the hash table if more than 75% full' do
-    #     expect(@hashtable.maxsize).to eq(8)
-    #     @hashtable.insert("key1",4)
-    #     @hashtable.insert("key2",8)
-    #     @hashtable.insert("key3",10)
-    #     @hashtable.insert("key4",11)
-    #     @hashtable.insert("key5",12)
-    #     @hashtable.insert("key6",13)
-    #     @hashtable.insert("key7",14)
-    #     expect(@hashtable.size).to eq(7)
-    #     expect(@hashtable.maxsize).to eq(16)
-    #   end
-    # end
+    describe("checkHand") do 
+        it "should check if hand is empty, draws 5 more" do
+            player2 = Player.new(0, [])
+            player2.stub(:checkBooks).and_return(true)
+            player2.checkHand(@deck)
+            expect(player2.hand.size).to eq(5)
+        end
+        it "should check if hand is empty, if not won't draw" do
+            player2 = Player.new(0, [Card.new("T",5)])
+            player2.stub(:checkBooks).and_return(true)
+            player2.checkHand(@deck)
+            expect(player2.hand.size).to eq(1)
+        end
+    end
 
+ 
     
 
 end

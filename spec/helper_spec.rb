@@ -22,11 +22,11 @@ describe "Helper Methods" do
     end
 
     describe "#search" do
-      it 'returns nil if element not found' do
-        expect(insert([3,6,7,9], 4)).to eq(nil)
+      it 'returns false if element not found' do
+        expect(search([3,6,7,9], 4)).to eq(false)
       end
       it 'returns element if found' do
-        expect(insert([3,6,7,9], 6)).to eq(6)
+        expect(search([3,6,7,9], 6)).to eq(6)
       end
     end
 
