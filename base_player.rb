@@ -36,6 +36,9 @@ class BasePlayer
     # * Check if I need to draw from the deck (if i have no more cards)
     # otherwise
     # * cards_given empty so I draw from the deck.
+    #
+    # This method should return true if card_asked was found within cards_given
+    # or the deck; it should return false otherwise.
   end
 
   def draw(card_asked, deck)
