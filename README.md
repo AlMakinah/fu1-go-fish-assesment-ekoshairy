@@ -22,6 +22,17 @@ We're going to start out by implementing small helper methods that will assist u
 
 To run the tests: rspec spec/helper_spec
 
+REMEMBER:
+=========
+
+Refer to the Ruby documentation and use the available methods to simplify your solution and save your time. 
+
+This assignment can be simplified if you make use of:
+
+1. http://ruby-doc.org/core-2.4.0/Comparable.html
+2. http://ruby-doc.org/core-2.4.0/Array.html#method-i-sort
+3. http://ruby-doc.org/core-2.4.0/Array.html#method-i-shuffle
+
 ### Exercise 1
 
 Create a method, that takes as input an array, and sorts it. 
@@ -48,7 +59,7 @@ Now we have our Card and Card Deck classes. Let's start implementing the game.
 
 ### Exercise 6
 
-Open the Player class, and complete the missing code.
+Open the Base Player class, and complete the missing code.
 
 ### Exercise 7
 
