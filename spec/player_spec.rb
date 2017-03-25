@@ -60,7 +60,9 @@ describe Player do
 
       it "should not add card to the player's hand if no cards" do
         s1 = @player.hand.size
-        @player.stub(:draw).and_return(false)
+        
+        allow(@player).to recieve(:draw).and_return(false)
+
         @player.respond_to_response(2, nil, @deck)
         expect(@player.hand.size - s1).to eq(0)
       end
@@ -68,25 +70,25 @@ describe Player do
 
     describe("draw") do
       it "should add card to the player's hand if found" do
-        @deck.stub(:deal).and_return([Card.new("H", 2)])
+        allow(@deck).to recieve(:deal).and_return([Card.new("H", 2)])
         s1 = @player.hand.size
         @player.draw(2, @deck)
         expect(@player.hand.size - s1).to eq(1)
       end
 
       it "should return true if found" do
-        @deck.stub(:deal).and_return([Card.new("H", 2)])
+        allow(@deck).to recieve(:deal).and_return([Card.new("H", 2)])
         expect(@player.draw(2, @deck)).to eq(true)
       end
 
       it "should add card to the player's hand if not found" do
-        @deck.stub(:deal).and_return([Card.new("H", 3)])
+        allow(@deck).to recieve(:deal).and_return([Card.new("H", 3)])
         s1 = @player.hand.size
         @player.draw(2, @deck)
         expect(@player.hand.size - s1).to eq(1)
       end
       it "should return false if not found" do
-        @deck.stub(:deal).and_return([Card.new("H", 3)])
+        allow(@deck).to recieve(:deal).and_return([Card.new("H", 3)])
         expect(@player.draw(2, @deck)).to eq(false)
       end
     end
@@ -127,13 +129,13 @@ describe Player do
     describe("checkHand") do 
         it "should check if hand is empty, draws 5 more" do
             player2 = Player.new(0, [])
-            player2.stub(:checkBooks).and_return(true)
+            allow(player2).to recieve(:checkBooks).and_return(true)
             player2.checkHand(@deck)
             expect(player2.hand.size).to eq(5)
         end
         it "should check if hand is empty, if not won't draw" do
             player2 = Player.new(0, [Card.new("T",5)])
-            player2.stub(:checkBooks).and_return(true)
+            allow(player2).to recieve(:checkBooks).and_return(true)
             player2.checkHand(@deck)
             expect(player2.hand.size).to eq(1)
         end
