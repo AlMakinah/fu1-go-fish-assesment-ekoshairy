@@ -36,15 +36,18 @@ describe Player do
         out = @player.respond(1, @deck)
         expect(out).to eq([@one])
       end
+
       it 'should return player\'s matching cards if more than one ' do
         out = @player.respond(2, @deck)
         expect(out).to eq([@two, @three])
       end
+
       it 'should remove player\'s matching cards from hand ' do
         s1 = @player.hand.size
         @player.respond(2, @deck)
         expect(s1 - @player.hand.size).to eq(2)
       end
+
       it 'should return false if not found' do
         out = @player.respond(6, @deck)
         expect(out).to eq(false)
@@ -58,6 +61,13 @@ describe Player do
         expect(@player.hand.size - s1).to eq(1)
       end
 
+      it "should draw from deck if card is not what the player asked for" do
+        deck_size = @deck.size
+        @player.respond_to_response(3, nil, @deck)
+        p deck_size
+        expect(deck_size - @deck.size).to eq(1)
+      end
+
       it "should not add card to the player's hand if no cards" do
         s1 = @player.hand.size
         
@@ -65,6 +75,16 @@ describe Player do
 
         @player.respond_to_response(2, nil, @deck)
         expect(@player.hand.size - s1).to eq(0)
+      end
+
+      it "should return true if the player found the card they asked for" do
+        expect(@player.respond_to_response(2, [Card.new("H", 2)], @deck)).to eq(true)
+        allow(@player).to receive(:draw).and_return(true)
+        expect(@player.respond_to_response(2, nil, @deck)).to eq(true)
+      end
+
+      it "should return false if the player didn't find the card they asked for" do
+        expect(@player.respond_to_response(3, [Card.new("H", 2)], @deck)).to eq(false)
       end
     end
 
