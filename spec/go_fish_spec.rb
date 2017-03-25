@@ -24,20 +24,20 @@ describe GoFish do
       #   @game.start
       # end
       it 'should stop when game is over' do
-        allow(@game).to receive(:gameOver).and_return(true)
-        expect(@game).to receive(:getScore)
+        allow(@game).to receive(:game_over).and_return(true)
+        expect(@game).to receive(:score)
         @game.start
       end
     end
 
     describe "#getScore" do
       it "should return player with highest number of books" do
-        expect(@game.players[0]).to receive(:getBooks).and_return(1)
-        expect(@game.players[1]).to receive(:getBooks).and_return(4)
-        expect(@game.players[2]).to receive(:getBooks).and_return(8)
-        expect(@game.players[3]).to receive(:getBooks).and_return(2)
+        expect(@game.players[0]).to receive(:books).and_return(1)
+        expect(@game.players[1]).to receive(:books).and_return(4)
+        expect(@game.players[2]).to receive(:books).and_return(8)
+        expect(@game.players[3]).to receive(:books).and_return(2)
 
-        expect(@game.getScore).to eq(@game.players[2])
+        expect(@game.score).to eq(@game.players[2])
       end
     end
 
@@ -46,7 +46,7 @@ describe GoFish do
         expect(Player).to receive(:new).exactly(1).times
         expect(ComputerPlayer).to receive(:new).exactly(3).times
         expect(@game.players.size).to eq(4)
-        @game.createPlayers
+        @game.create_players
       end
     end
 

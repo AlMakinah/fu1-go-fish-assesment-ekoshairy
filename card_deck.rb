@@ -27,7 +27,7 @@ class CardDeck
     end
   end
 
-  private :initializeDeck
+  private :initialize_deck
 
   def shuffle
     # TODO: Use your helper.rb shuffle method for this.

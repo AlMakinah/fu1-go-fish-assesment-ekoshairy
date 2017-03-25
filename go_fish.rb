@@ -32,7 +32,7 @@ class GoFish
     # randomly select a player to start.
     turn = rand(0..3)
 
-    until gameOver # game loop
+    until game_over # game loop
       ask = @players[turn].play
       if ask # if player still has cards
         player_asked = ask[0]
@@ -56,7 +56,7 @@ class GoFish
   end
 
   def score # winner is the player with the highest number of books.
-    winner = @players.max_by(&:getBooks)
+    winner = @players.max_by(&:books)
     puts "The winner is player #{winner.id}"
     winner
   end

@@ -5,13 +5,13 @@ require 'spec_helper'
 describe "Helper Methods" do 
 
     
-    describe "#sortArray" do
+    describe "#sort_array" do
       it 'sorts an array' do
-        expect(sortArray([6,3,4,5])).to eq([3,4,5,6])
+        expect(sort_array([6,3,4,5])).to eq([3,4,5,6])
       end
 
       it 'keeps sorted array as is' do
-        expect(sortArray([1,2,3,4])).to eq([1,2,3,4])
+        expect(sort_array([1,2,3,4])).to eq([1,2,3,4])
       end
     end
 
@@ -30,7 +30,7 @@ describe "Helper Methods" do
       end
     end
 
-    describe "#shuffleStack" do
+    describe "#shuffle_stack" do
       it 'shuffles a stack' do
         s = Stack.new
         s.push(5)
@@ -38,7 +38,7 @@ describe "Helper Methods" do
         s.push(3)
         s.push(4)
         out = []
-        shuffleStack(s)
+        shuffle_stack(s)
         while s.size!=0
             out << s.pop
         end
