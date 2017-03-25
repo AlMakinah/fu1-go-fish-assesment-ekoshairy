@@ -24,7 +24,7 @@ describe GoFish do
       #   @game.start
       # end
       it 'should stop when game is over' do
-        @game.stub(:gameOver).and_return(true)
+        allow(@game).to receive(:gameOver).and_return(true)
         expect(@game).to receive(:getScore)
         @game.start
       end
