@@ -5,26 +5,24 @@ require './stack'
 require './helper'
 require './card'
 
+# Represents a deck of playing cards
 class CardDeck
   include Comparable
   attr_accessor :cards # cards is a list of Card objects
 
   def initialize(cards = nil)
-    if cards.nil?
-      @cards = Stack.new
-    else
-      @cards = cards
-    end
-    initializeDeck
+    @cards = cards.nil ? Stack.new : cards
+
+    initialize_deck
   end
 
-  def initializeDeck
-    suits = ['H', 'S', 'D', 'T']
+  def initialize_deck
+    suits = %w(H S D T)
     ranks = 1..13
 
     ranks.each do |r|
       suits.each do |s|
-        @cards.push Card.new(s,r)
+        @cards.push Card.new(s, r)
       end
     end
   end
@@ -39,7 +37,7 @@ class CardDeck
     @cards.peek
   end
 
-  def deal(num=1)  #removes first num elements and returns it.
+  def deal(num = 1) # removes first num elements and returns it.
     # TODO
   end
 
@@ -48,11 +46,12 @@ class CardDeck
   end
 
   def empty?
-    @cards.size == 0
+    @cards.size.zero?
   end
 
   def to_s
-    # print all elements in the stack, returning it to its original state afterward.
+    # print all elements in the stack, returning it to its original state
+    # afterward.
     # TODO
   end
 
@@ -64,16 +63,12 @@ class CardDeck
 
     return size_diff if size_diff != 0
 
-    while(!deck1.empty?)
-      c1 = deck1.pop
-      c2 = deck2.pop
-
-      c_diff = c1 <=> c2
+    until deck1.empty?
+      c_diff = deck1.pop <=> deck2.pop
 
       return c_diff if c_diff != 0
     end
 
-    return 0
+    0
   end
 end
-

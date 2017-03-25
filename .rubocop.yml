@@ -1,0 +1,14 @@
+AllCops:
+  Exclude:
+    - Gemfile
+    - spec/**/*
+    - private-tests/**/*
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/BlockNesting:
+  Enabled: false

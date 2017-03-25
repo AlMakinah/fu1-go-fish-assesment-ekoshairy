@@ -1,5 +1,5 @@
+# Represents a stack
 class Stack
-
   def initialize(data = [])
     @data = data
   end
@@ -15,17 +15,16 @@ class Stack
   def peek
     @data[size - 1]
   end
-  
+
   def size
-    return @data.length
+    @data.length
   end
 
   def empty?
-    return self.size == 0
+    size.zero?
   end
 
   def clone
     Stack.new(@data.dup)
   end
-
 end

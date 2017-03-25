@@ -1,3 +1,4 @@
+# Represents a playing card
 class Card
   include Comparable
 
@@ -13,12 +14,9 @@ class Card
   end
 
   def <=>(other)
-    suit_ranks = ['S', 'H', 'D', 'T']
+    return @rank <=> other.rank if @suit == other.suit
+    suit_ranks = %w(S H D T)
 
-    if @suit == other.suit
-      return @rank <=> other.rank
-    else
-      return suit_ranks.index(other.suit) <=> suit_ranks.index(@suit)
-    end
+    suit_ranks.index(other.suit) <=> suit_ranks.index(@suit)
   end
 end
