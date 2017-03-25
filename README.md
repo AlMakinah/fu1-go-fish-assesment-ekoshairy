@@ -32,6 +32,7 @@ This assignment can be simplified if you make use of:
 1. http://ruby-doc.org/core-2.4.0/Comparable.html
 2. http://ruby-doc.org/core-2.4.0/Array.html#method-i-sort
 3. http://ruby-doc.org/core-2.4.0/Array.html#method-i-shuffle
+4. http://ruby-doc.org/core-2.4.0/Array.html#method-i-select
 
 ### Exercise 1
 
