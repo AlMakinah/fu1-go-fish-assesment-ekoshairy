@@ -61,7 +61,7 @@ describe Player do
       it "should not add card to the player's hand if no cards" do
         s1 = @player.hand.size
         
-        allow(@player).to recieve(:draw).and_return(false)
+        allow(@player).to receive(:draw).and_return(false)
 
         @player.respond_to_response(2, nil, @deck)
         expect(@player.hand.size - s1).to eq(0)
@@ -70,35 +70,35 @@ describe Player do
 
     describe("draw") do
       it "should add card to the player's hand if found" do
-        allow(@deck).to recieve(:deal).and_return([Card.new("H", 2)])
+        allow(@deck).to receive(:deal).and_return([Card.new("H", 2)])
         s1 = @player.hand.size
         @player.draw(2, @deck)
         expect(@player.hand.size - s1).to eq(1)
       end
 
       it "should return true if found" do
-        allow(@deck).to recieve(:deal).and_return([Card.new("H", 2)])
+        allow(@deck).to receive(:deal).and_return([Card.new("H", 2)])
         expect(@player.draw(2, @deck)).to eq(true)
       end
 
       it "should add card to the player's hand if not found" do
-        allow(@deck).to recieve(:deal).and_return([Card.new("H", 3)])
+        allow(@deck).to receive(:deal).and_return([Card.new("H", 3)])
         s1 = @player.hand.size
         @player.draw(2, @deck)
         expect(@player.hand.size - s1).to eq(1)
       end
       it "should return false if not found" do
-        allow(@deck).to recieve(:deal).and_return([Card.new("H", 3)])
+        allow(@deck).to receive(:deal).and_return([Card.new("H", 3)])
         expect(@player.draw(2, @deck)).to eq(false)
       end
     end
 
-    describe("checkBooks") do 
+    describe("check_books") do 
         it "should check if there is a book of a certain rank" do
             s1 = @player.books.size
             @player.hand << Card.new("T", 2)
             @player.hand << Card.new("D", 2)
-            @player.checkBooks(2)
+            @player.check_books(2)
             expect(@player.books.size - s1).to eq(1)
         end
 
@@ -106,13 +106,13 @@ describe Player do
             @player.hand << Card.new("T", 2)
             @player.hand << Card.new("D", 2)
             s1 = @player.hand.size
-            @player.checkBooks(2)
+            @player.check_books(2)
             expect(s1 - @player.hand.size).to eq(4)
         end
 
         it "should check if there is a book of a certain rank and if not found wont add" do
             s1 = @player.books.size
-            @player.checkBooks(2)
+            @player.check_books(2)
             expect(@player.books.size - s1).to eq(0)
         end
 
@@ -120,23 +120,23 @@ describe Player do
             s1 = @player.books.size
             @player.hand << Card.new("T", 2)
             @player.hand << Card.new("D", 2)
-            @player.checkBooks
+            @player.check_books
             expect(@player.books.size - s1).to eq(1)
         end
         
     end
 
-    describe("checkHand") do 
+    describe("check_hand") do 
         it "should check if hand is empty, draws 5 more" do
             player2 = Player.new(0, [])
-            allow(player2).to recieve(:checkBooks).and_return(true)
-            player2.checkHand(@deck)
+            allow(player2).to receive(:check_books).and_return(true)
+            player2.check_hand(@deck)
             expect(player2.hand.size).to eq(5)
         end
         it "should check if hand is empty, if not won't draw" do
             player2 = Player.new(0, [Card.new("T",5)])
-            allow(player2).to recieve(:checkBooks).and_return(true)
-            player2.checkHand(@deck)
+            allow(player2).to receive(:check_books).and_return(true)
+            player2.check_hand(@deck)
             expect(player2.hand.size).to eq(1)
         end
     end

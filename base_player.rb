@@ -58,8 +58,7 @@ class BasePlayer
 
   end
 
-
-  def checkBooks(rank=nil)
+  def check_books(rank=nil)
 
     # TODO:
     # if no rank is provided
@@ -71,8 +70,7 @@ class BasePlayer
 
   end
 
-
-  def checkHand(deck)
+  def check_hand(deck)
     # TODO
     # if hand is empty
       # draw 5 cards from the deck
