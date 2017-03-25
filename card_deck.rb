@@ -6,10 +6,15 @@ require './helper'
 require './card'
 
 class CardDeck
+  include Comparable
   attr_accessor :cards # cards is a list of Card objects
 
-  def initialize
-    @cards = Stack.new
+  def initialize(cards = nil)
+    if cards.nil?
+      @cards = Stack.new
+    else
+      @cards = cards
+    end
     initializeDeck
   end
 
@@ -51,6 +56,24 @@ class CardDeck
     # TODO
   end
 
-end
+  def <=>(other)
+    deck1 = @cards.clone
+    deck2 = other.cards.clone
 
+    size_diff = deck1.size <=> deck2.size
+
+    return size_diff if size_diff != 0
+
+    while(!deck1.empty?)
+      c1 = deck1.pop
+      c2 = deck2.pop
+
+      c_diff = c1 <=> c2
+
+      return c_diff if c_diff != 0
+    end
+
+    return 0
+  end
+end
 

@@ -1,7 +1,7 @@
 class Stack
 
-  def initialize
-    @data = []
+  def initialize(data = [])
+    @data = data
   end
 
   def push(val)
@@ -18,6 +18,14 @@ class Stack
   
   def size
     return @data.length
+  end
+
+  def empty?
+    return self.size == 0
+  end
+
+  def clone
+    Stack.new(@data.dup)
   end
 
 end
