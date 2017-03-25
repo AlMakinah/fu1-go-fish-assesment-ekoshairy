@@ -51,9 +51,9 @@ We would like to shuffle a stack with the help of 2 other stacks. How would you 
 
 ### Exercise 5
 
-Re-implement the card deck to use a stack instead of an array. Also add a to_s method which prints all elements in the deck. Finally alter the deal method to return the last n elements, with n having a default value of 1
+Open the CardDeck class and implement the missing code.
 
-
+---
 
 Now we have our Card and Card Deck classes. Let's start implementing the game.
 
